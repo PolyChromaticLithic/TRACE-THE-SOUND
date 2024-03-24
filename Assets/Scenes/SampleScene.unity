@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -336,6 +337,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b76a36fc540f924ba174db0381b13ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wave: []
+  isPlaying: 0
+  frequency: 440
 --- !u!1 &640923037
 GameObject:
   m_ObjectHideFlags: 0
@@ -5184,6 +5200,7 @@ MonoBehaviour:
   penRenderer: {fileID: 640923039}
   whiteMaterial: {fileID: 2100000, guid: 715f19d06ed59364bbed4acd9c7bf4b8, type: 2}
   redMaterial: {fileID: 2100000, guid: dd4c2c375596b1647aebc25deeb10abc, type: 2}
+  wave: {fileID: 519420033}
 --- !u!58 &640923042
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ public class Pen : MonoBehaviour
     [SerializeField]
     private Material redMaterial;
 
+    [SerializeField]
+    private Wave wave;
+
     void White()
     {
         penRenderer.material = whiteMaterial;
@@ -50,6 +53,7 @@ public class Pen : MonoBehaviour
         White();
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(150, 860, 0));
         penParticle.Emit(1);
+        wave.isPlaying = false;
     }
 
     public void Up()
@@ -59,6 +63,8 @@ public class Pen : MonoBehaviour
         {
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(930, 860, 0));
             penParticle.Emit(1);
+            wave.PointsToWave(points);
+            wave.isPlaying = true;
         }
         else
         {
