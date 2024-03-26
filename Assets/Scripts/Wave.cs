@@ -19,13 +19,7 @@ public class Wave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var s = new StringBuilder();
-        foreach (var item in wave)
-        {
-            s.Append(item);
-            s.Append(",");
-        }
-        Debug.Log(s.ToString());
+        
     }
 
     public double frequency = 110;
@@ -59,15 +53,37 @@ public class Wave : MonoBehaviour
 
     public List<float> PointsToWave(List<Vector2> points)
     {
-        var wave = new List<float>();
-        for (int i = 150; i <= 930; i++)
+        var p = new StringBuilder();
+        foreach (var item in points)
         {
-            var first = points.Where(point => point.x <= i).LastOrDefault();
-            var last = points.Where(point => point.x >= i).FirstOrDefault();
+            p.Append(item);
+            p.Append("\n");
+        }
+        Debug.Log(p.ToString());
+
+        var wave = new List<float>();
+        for (int i = 150; i <= 929; i++)
+        {
+            
+            var first = points.Where(point => point.x <= i).Last();
+            var last = points.Where(point => point.x > i).First();
             var ratio = (last.y - first.y) / (last.x - first.x);
+            if (i % 100 == 0)
+            {
+                Debug.Log($"first:{points.Where(point => point.x <= i).Last()},last:{points.Where(point => point.x >= i).First()},ratio:{(last.y - first.y) / (last.x - first.x)}");
+            }
             wave.Add((first.y - 860 + ratio * (i - first.x)) / 460);
         }
         this.wave = wave;
+
+        var s = new StringBuilder();
+        foreach (var item in wave)
+        {
+            s.Append(item);
+            s.Append("\n");
+        }
+        Debug.Log(s.ToString());
+
         return wave;
     }
 

@@ -25,13 +25,11 @@ public class Pen : MonoBehaviour
 
     void White()
     {
-        penRenderer.material = whiteMaterial;
         penRenderer.trailMaterial = whiteMaterial;
     }
 
     void Red()
     {
-        penRenderer.material = redMaterial;
         penRenderer.trailMaterial = redMaterial;
     }
 
@@ -53,6 +51,7 @@ public class Pen : MonoBehaviour
         White();
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(150, 860, 0));
         penParticle.Emit(1);
+        points.Add(new Vector2(150, 860));
         wave.isPlaying = false;
     }
 
@@ -63,6 +62,7 @@ public class Pen : MonoBehaviour
         {
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(930, 860, 0));
             penParticle.Emit(1);
+            points.Add(new Vector2(930, 860));
             wave.PointsToWave(points);
             wave.isPlaying = true;
         }
@@ -70,10 +70,11 @@ public class Pen : MonoBehaviour
         {
             Red();
         }
+        points.Clear();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var clampedPositionX = Mathf.Clamp(Input.mousePosition.x, 151, 1080 - 151);
         var clampedPositionY = Mathf.Clamp(Input.mousePosition.y, 401, 1920 - 601);
