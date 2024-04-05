@@ -4,11 +4,16 @@ using System.Linq;
 using System;
 using UnityEngine;
 using System.Text;
+using UnityEngine.UI;
+using TMPro;
 
 public class Wave : MonoBehaviour
 {
     public List<float> wave = new();
     public bool isPlaying = false;
+
+    public Slider volumeSlider;
+    public TMP_InputField frequencyField;
     
     // Start is called before the first frame update
     void Start()
@@ -22,7 +27,7 @@ public class Wave : MonoBehaviour
         
     }
 
-    public double frequency = 110;
+    //public double frequency = 110;
     private double sampling_frequency = 48000;
     private double increment;
     private double time;
@@ -30,6 +35,12 @@ public class Wave : MonoBehaviour
     void OnAudioFilterRead(float[] data, int channels)
     {
         if (wave.Count == 0) { return; }
+        int frequency;
+        if (!int.TryParse(frequencyField.text,out frequency) || frequency == 0)
+        {
+            return;
+        }
+        frequency = Math.Abs(frequency);
         if (isPlaying)
         {
             increment = frequency * 2 * System.Math.PI / sampling_frequency;
@@ -41,7 +52,7 @@ public class Wave : MonoBehaviour
                     time = 0;
                 }
                 var value = wave[(int)(wave.Count * (time / (2 * System.Math.PI)))];
-                data[i] = (float)value * 0.05f;
+                data[i] = (float)value * 0.2f * volumeSlider.value;
                 if (channels == 2)
                 {
                     data[i + 1] = data[i];

@@ -23,6 +23,8 @@ public class Pen : MonoBehaviour
     [SerializeField]
     private Wave wave;
 
+    public bool isConnected;
+
     void White()
     {
         penRenderer.trailMaterial = whiteMaterial;
@@ -53,6 +55,7 @@ public class Pen : MonoBehaviour
         penParticle.Emit(1);
         points.Add(new Vector2(150, 860));
         wave.isPlaying = false;
+        isConnected = false;
     }
 
     public void Up()
@@ -64,7 +67,7 @@ public class Pen : MonoBehaviour
             penParticle.Emit(1);
             points.Add(new Vector2(930, 860));
             wave.PointsToWave(points);
-            wave.isPlaying = true;
+            isConnected = true;
         }
         else
         {
