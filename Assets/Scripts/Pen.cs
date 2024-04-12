@@ -54,7 +54,7 @@ public class Pen : MonoBehaviour
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(150, 860, 0));
         penParticle.Emit(1);
         points.Add(new Vector2(150, 860));
-        wave.isPlaying = false;
+        wave.Stop();
         isConnected = false;
     }
 

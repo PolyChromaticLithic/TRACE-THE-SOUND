@@ -8,9 +8,9 @@ public class Play : MonoBehaviour
     [SerializeField]
     private Wave wave;
 
-    [SerializeField] private Image Image;
-    [SerializeField] private Sprite playSprite;
-    [SerializeField] private Sprite pauseSprite;
+    public Image Image;
+    public Sprite playSprite;
+    public Sprite pauseSprite;
 
     [SerializeField] private Pen pen;
 
@@ -34,14 +34,12 @@ public class Play : MonoBehaviour
         if (!pen.isConnected) return;
         if (wave.isPlaying)
         {
-            wave.isPlaying = false;
-            Image.sprite = playSprite;
+            wave.Stop();
 
         }
         else
         {
-            wave.isPlaying = true;
-            Image.sprite = pauseSprite;
+            wave.Play();
         }
     }
 }
