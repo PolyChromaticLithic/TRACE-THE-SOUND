@@ -39,6 +39,7 @@ public class Wave : MonoBehaviour
             return 0;
         }
         return Math.Abs(frequency);
+        Debug.Log(frequency);
     }
 
     void OnAudioFilterRead(float[] data, int channels)
@@ -136,14 +137,19 @@ public class Wave : MonoBehaviour
 
     public void Stop()
     {
+        Stop(true);
+    }
+
+    public void Stop(bool isExport)
+    {
         isPlaying = false;
         play.Image.sprite = play.playSprite;
         exportLength = Time.realtimeSinceStartup - startTime;
-        if (exportToggle.isOn && exportLength > 0) 
+        if (isExport && exportToggle.isOn && exportLength > 0)
         {
             var fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             CreateAudioClip.CreateClip();
-            SavWav.Save(fileName,CreateAudioClip.clip);
+            SavWav.Save(fileName, CreateAudioClip.clip);
             fileData.text = $"The file has been exported as \"{Application.persistentDataPath.ToString() + "/" + fileName + ".wav"}\".";
             Debug.Log($"ファイルは{Application.persistentDataPath.ToString()}に書き出されました。");
         }
